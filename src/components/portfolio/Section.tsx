@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import type { ReactNode } from "react";
 
-export function SectionHeader({ kicker, title, subtitle }) {
+type Props = { kicker: string; title: ReactNode; subtitle?: ReactNode };
+
+export function SectionHeader({ kicker, title, subtitle }: Props) {
   return (
     <div className="text-center mb-16">
       <motion.div
