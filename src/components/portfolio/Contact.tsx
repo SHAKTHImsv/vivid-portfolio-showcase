@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Contact() {
   const [sent, setSent] = useState(false);
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSent(true);
     setTimeout(() => setSent(false), 3000);
