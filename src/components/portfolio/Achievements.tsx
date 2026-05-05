@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Trophy, Users } from "lucide-react";
 import { SectionHeader } from "./Section";
+import { TiltCard } from "./animations";
 
 const items = [
   { place: "2nd Place", title: "Web Designing", where: "AVS Engineering College" },
@@ -27,19 +28,24 @@ export default function Achievements() {
             return (
               <motion.div
                 key={it.title + i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 0, scale: 0.5, rotate: -10 }}
+                whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                whileHover={{ y: -6, rotate: -1 }}
-                className="relative glass rounded-3xl p-6 overflow-hidden"
+                transition={{ delay: i * 0.1, type: "spring", stiffness: 120 }}
               >
-                <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-2xl opacity-50"
-                     style={{ background: "var(--neon-yellow)" }} />
+                <TiltCard className="relative glass rounded-3xl p-6 overflow-hidden h-full group" max={10}>
+                <motion.div
+                  className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-2xl opacity-50"
+                  style={{ background: "var(--neon-yellow)" }}
+                  animate={{ scale: [1, 1.3, 1] }}
+                  transition={{ duration: 4, repeat: Infinity, delay: i * 0.3 }}
+                />
                 <div className="relative z-10">
                   <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
                        style={{ background: "var(--gradient-primary)" }}>
-                    <Ic className="w-6 h-6 text-primary-foreground" />
+                    <motion.div whileHover={{ rotate: 360, scale: 1.2 }} transition={{ duration: 0.6 }}>
+                      <Ic className="w-6 h-6 text-primary-foreground" />
+                    </motion.div>
                   </div>
                   <div className="text-xs font-mono-display uppercase tracking-widest text-accent mb-1">
                     {it.place}
@@ -47,6 +53,7 @@ export default function Achievements() {
                   <h3 className="font-display font-bold text-xl">{it.title}</h3>
                   <p className="text-sm text-muted-foreground mt-1">{it.where}</p>
                 </div>
+                </TiltCard>
               </motion.div>
             );
           })}

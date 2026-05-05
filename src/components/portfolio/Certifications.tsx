@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Award, BadgeCheck } from "lucide-react";
 import { SectionHeader } from "./Section";
+import { TiltCard } from "./animations";
 
 const certs = [
   { title: "Frontend Developer (React)", by: "HackerRank", color: "var(--neon-cyan)" },
@@ -25,24 +26,32 @@ export default function Certifications() {
           {certs.map((c, i) => (
             <motion.div
               key={c.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, rotateY: -20 }}
+              whileInView={{ opacity: 1, y: 0, rotateY: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.07 }}
-              whileHover={{ y: -6 }}
-              className="relative glass rounded-3xl p-6 group overflow-hidden"
             >
+              <TiltCard className="relative glass rounded-3xl p-6 group overflow-hidden h-full" max={12}>
               <div
                 className="absolute -bottom-12 -left-12 w-40 h-40 rounded-full blur-3xl opacity-30 group-hover:opacity-60 transition"
                 style={{ background: c.color }}
               />
+              <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                <motion.div
+                  className="absolute top-0 -left-1/2 w-1/2 h-full skew-x-12"
+                  style={{ background: "linear-gradient(90deg, transparent, oklch(1 0 0 / 10%), transparent)" }}
+                  animate={{ x: ["0%", "400%"] }}
+                  transition={{ duration: 3, repeat: Infinity, repeatDelay: i * 0.5 + 2, ease: "easeInOut" }}
+                />
+              </div>
               <div className="relative z-10 flex items-start gap-4">
-                <div
+                <motion.div
+                  whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
                   className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
                   style={{ background: c.color, boxShadow: `0 0 25px ${c.color}` }}
                 >
                   <Award className="w-6 h-6 text-background" />
-                </div>
+                </motion.div>
                 <div>
                   <h3 className="font-display font-bold text-lg leading-tight">{c.title}</h3>
                   <div className="flex items-center gap-1.5 mt-1 text-sm text-muted-foreground">
@@ -50,6 +59,7 @@ export default function Certifications() {
                   </div>
                 </div>
               </div>
+              </TiltCard>
             </motion.div>
           ))}
         </div>

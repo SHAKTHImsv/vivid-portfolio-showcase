@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
 import { SectionHeader } from "./Section";
 import { useState } from "react";
+import { Magnetic, Particles } from "./animations";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -16,8 +17,13 @@ export default function Contact() {
   return (
     <section id="contact" className="relative py-28 px-6 overflow-hidden">
       <div className="absolute inset-0 bg-cosmic opacity-60" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20 blur-3xl"
-           style={{ background: "var(--gradient-primary)" }} />
+      <motion.div
+        animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20 blur-3xl"
+        style={{ background: "var(--gradient-primary)" }}
+      />
+      <Particles count={25} color="var(--neon-purple)" />
 
       <div className="container mx-auto max-w-5xl relative z-10">
         <SectionHeader
@@ -112,15 +118,20 @@ export default function Contact() {
                 placeholder="Tell me about your project..."
               />
             </div>
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              type="submit"
-              className="w-full py-3 rounded-xl font-semibold text-primary-foreground flex items-center justify-center gap-2 neon-shadow"
-              style={{ background: "var(--gradient-primary)" }}
-            >
-              {sent ? "Message sent! ✨" : (<>Send Message <Send className="w-4 h-4" /></>)}
-            </motion.button>
+            <Magnetic strength={0.2}>
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                type="submit"
+                className="w-full py-3 rounded-xl font-semibold text-primary-foreground flex items-center justify-center gap-2 neon-shadow relative overflow-hidden"
+                style={{ background: "var(--gradient-primary)" }}
+              >
+                <span className="absolute inset-0 animate-shimmer" />
+                <span className="relative flex items-center gap-2">
+                  {sent ? "Message sent! ✨" : (<>Send Message <Send className="w-4 h-4" /></>)}
+                </span>
+              </motion.button>
+            </Magnetic>
           </motion.form>
         </div>
 
