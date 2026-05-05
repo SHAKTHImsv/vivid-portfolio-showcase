@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { SectionHeader } from "./Section";
+import { TiltCard, Spotlight } from "./animations";
 
 const groups = [
   {
@@ -57,24 +58,32 @@ export default function Skills() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: gi * 0.08 }}
-              className="relative glass rounded-3xl p-6 overflow-hidden group"
             >
-              <div
-                className="absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl opacity-40 group-hover:opacity-70 transition"
-                style={{ background: g.color }}
-              />
-              <h3 className="font-display font-bold text-xl mb-4">{g.title}</h3>
-              <div className="flex flex-wrap gap-2 relative z-10">
-                {g.items.map((it) => (
-                  <motion.span
-                    key={it}
-                    whileHover={{ scale: 1.08, y: -2 }}
-                    className="px-3 py-1.5 rounded-full text-sm bg-white/5 border border-white/10 hover:border-white/30 cursor-default"
-                  >
-                    {it}
-                  </motion.span>
-                ))}
-              </div>
+              <TiltCard className="relative glass rounded-3xl p-6 overflow-hidden group h-full" max={8}>
+                <Spotlight />
+                <motion.div
+                  className="absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl opacity-40 group-hover:opacity-70 transition"
+                  style={{ background: g.color }}
+                  animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
+                  transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+                />
+                <h3 className="font-display font-bold text-xl mb-4">{g.title}</h3>
+                <div className="flex flex-wrap gap-2 relative z-10">
+                  {g.items.map((it, idx) => (
+                    <motion.span
+                      key={it}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: gi * 0.08 + idx * 0.04, type: "spring" }}
+                      whileHover={{ scale: 1.12, y: -3, rotate: -2 }}
+                      className="px-3 py-1.5 rounded-full text-sm bg-white/5 border border-white/10 hover:border-white/30 cursor-default"
+                    >
+                      {it}
+                    </motion.span>
+                  ))}
+                </div>
+              </TiltCard>
             </motion.div>
           ))}
         </div>

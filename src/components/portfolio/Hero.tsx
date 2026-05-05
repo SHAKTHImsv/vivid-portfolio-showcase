@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from "lucide-react";
+import { SplitText, Magnetic, Particles } from "./animations";
 
 export default function Hero() {
   return (
@@ -14,6 +15,7 @@ export default function Hero() {
            style={{ background: "var(--neon-cyan)", animationDelay: "3s" }} />
       <div className="absolute -bottom-32 left-1/3 w-[500px] h-[500px] rounded-full opacity-30 blur-3xl animate-blob"
            style={{ background: "var(--neon-yellow)", animationDelay: "6s" }} />
+      <Particles count={40} color="var(--neon-pink)" />
 
       <div className="relative z-10 container mx-auto px-6 text-center">
         <motion.div
@@ -26,16 +28,12 @@ export default function Hero() {
           <span className="text-sm text-muted-foreground">Available for opportunities</span>
         </motion.div>
 
-        <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.1 }}
-          className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-6"
-        >
-          Hi, I'm <span className="text-rainbow">Shakthivishwa</span>
+        <h1 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-6">
+          <SplitText delay={0.1}>Hi, I'm </SplitText>
+          <span className="text-rainbow"><SplitText delay={0.3}>Shakthivishwa</SplitText></span>
           <br />
-          <span className="text-gradient">Building the future</span>
-        </motion.h1>
+          <span className="text-gradient"><SplitText delay={0.7}>Building the future</SplitText></span>
+        </h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -53,19 +51,23 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.5 }}
           className="flex flex-wrap items-center justify-center gap-4 mb-14"
         >
-          <a
-            href="#projects"
-            className="px-7 py-3 rounded-full font-semibold text-primary-foreground neon-shadow animate-pulse-glow transition-transform hover:scale-105"
-            style={{ background: "var(--gradient-primary)" }}
-          >
-            View My Work
-          </a>
-          <a
-            href="#contact"
-            className="px-7 py-3 rounded-full font-semibold glass hover:bg-white/10 transition"
-          >
-            Get in Touch
-          </a>
+          <Magnetic>
+            <a
+              href="#projects"
+              className="inline-block px-7 py-3 rounded-full font-semibold text-primary-foreground neon-shadow animate-pulse-glow"
+              style={{ background: "var(--gradient-primary)" }}
+            >
+              View My Work
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a
+              href="#contact"
+              className="inline-block px-7 py-3 rounded-full font-semibold glass hover:bg-white/10 transition"
+            >
+              Get in Touch
+            </a>
+          </Magnetic>
         </motion.div>
 
         <motion.div

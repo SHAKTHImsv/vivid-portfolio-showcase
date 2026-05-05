@@ -1,12 +1,13 @@
 import { motion } from "framer-motion";
 import { GraduationCap, Briefcase, Code2 } from "lucide-react";
 import { SectionHeader } from "./Section";
+import { Counter, TiltCard } from "./animations";
 
 const stats = [
-  { value: "8.25", label: "Current CGPA" },
-  { value: "10+", label: "Projects Built" },
-  { value: "2", label: "Internships" },
-  { value: "5+", label: "Awards Won" },
+  { value: 8.25, suffix: "", label: "Current CGPA" },
+  { value: 10, suffix: "+", label: "Projects Built" },
+  { value: 2, suffix: "", label: "Internships" },
+  { value: 5, suffix: "+", label: "Awards Won" },
 ];
 
 const timeline = [
@@ -52,15 +53,27 @@ export default function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
-              className="glass rounded-2xl p-6 text-center hover:scale-105 transition-transform"
             >
-              <div className="font-display text-4xl font-bold text-rainbow">{s.value}</div>
-              <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
+              <TiltCard className="glass rounded-2xl p-6 text-center" max={12}>
+                <div className="font-display text-4xl font-bold text-rainbow">
+                  <Counter to={s.value} suffix={s.suffix} />
+                </div>
+                <div className="text-sm text-muted-foreground mt-1">{s.label}</div>
+              </TiltCard>
             </motion.div>
           ))}
         </div>
 
-        <div className="grid gap-6">
+        <div className="relative grid gap-6">
+          <motion.div
+            aria-hidden
+            initial={{ height: 0 }}
+            whileInView={{ height: "100%" }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.2 }}
+            className="absolute left-7 top-0 w-0.5 hidden md:block"
+            style={{ background: "var(--gradient-rainbow)" }}
+          />
           {timeline.map((t, i) => (
             <motion.div
               key={t.title}

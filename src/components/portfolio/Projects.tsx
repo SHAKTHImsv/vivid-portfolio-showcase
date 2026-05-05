@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowUpRight, Database, Bot, FileText } from "lucide-react";
 import { SectionHeader } from "./Section";
+import { TiltCard, Spotlight } from "./animations";
 
 const projects = [
   {
@@ -44,16 +45,21 @@ export default function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.1 }}
-              whileHover={{ y: -6 }}
-              className={`relative glass rounded-3xl p-7 overflow-hidden group ${
-                i === 0 ? "md:col-span-2" : ""
-              }`}
+              className={i === 0 ? "md:col-span-2" : ""}
             >
-              <div
-                className="absolute inset-0 opacity-20 group-hover:opacity-40 transition"
-                style={{ background: p.gradient }}
-              />
-              <div className="relative z-10">
+              <TiltCard className="relative glass rounded-3xl p-7 overflow-hidden group h-full" max={6}>
+                <Spotlight />
+                <div
+                  className="absolute inset-0 opacity-20 group-hover:opacity-40 transition"
+                  style={{ background: p.gradient }}
+                />
+                <motion.div
+                  className="absolute -top-1 left-0 right-0 h-px"
+                  style={{ background: "linear-gradient(90deg, transparent, oklch(1 0 0 / 60%), transparent)" }}
+                  animate={{ x: ["-100%", "100%"] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                />
+                <div className="relative z-10">
                 <div className="flex items-start justify-between mb-6">
                   <div
                     className="w-14 h-14 rounded-2xl flex items-center justify-center"
@@ -69,15 +75,17 @@ export default function Projects() {
                 <p className="text-muted-foreground mb-6 max-w-2xl">{p.desc}</p>
                 <div className="flex flex-wrap gap-2">
                   {p.tags.map((t) => (
-                    <span
+                    <motion.span
                       key={t}
+                      whileHover={{ scale: 1.1, y: -2 }}
                       className="px-3 py-1 rounded-full text-xs font-mono-display bg-white/10 border border-white/10"
                     >
                       {t}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
-              </div>
+                </div>
+              </TiltCard>
             </motion.article>
           ))}
         </div>
