@@ -6,10 +6,11 @@ import { TiltCard } from "./animations";
 const certs = [
   { title: "Frontend Developer (React)", by: "HackerRank", color: "var(--neon-cyan)" },
   { title: "Solution Challenge", by: "Google", color: "var(--neon-pink)" },
-  { title: "Programming – Python", by: "DigiLabs", color: "var(--neon-yellow)" },
+  { title: "Programming – Python", by: "HackerRank", color: "var(--neon-yellow)" },
   { title: "Programming – JavaScript", by: "DigiLabs", color: "var(--neon-green)" },
   { title: "Programming – Java", by: "DigiLabs", color: "var(--neon-orange)" },
   { title: "Programming – C / C++ / C#", by: "DigiLabs", color: "var(--neon-purple)" },
+  { title: "AWS Infrastructure", by: "Guvi", color: "var(--neon-blue)" },
 ];
 
 export default function Certifications() {

@@ -5,12 +5,12 @@ import { TiltCard, Spotlight } from "./animations";
 
 const projects = [
   {
-    Icon: Bot,
-    title: "AI Data Assistant for Google Sheets",
-    desc: "A Python (Gemini API + Uvicorn) and React.js system enabling natural-language analysis of Google Sheets without altering source data.",
-    tags: ["Python", "Gemini API", "React.js", "Uvicorn"],
-    gradient: "linear-gradient(135deg, oklch(0.72 0.25 350), oklch(0.6 0.27 300))",
-  },
+  Icon: Bot,
+  title: "AI-Powered Adaptive Learning Platform",
+  desc: "An LLM-based learning platform that generates personalized learning paths, interactive modules, and AI-driven tutoring across trending domains.",
+  tags: ["LLM", "React.js", "Python", "MongoDB"],
+  gradient: "linear-gradient(135deg, oklch(0.72 0.25 350), oklch(0.6 0.27 300))",
+},
   {
     Icon: FileText,
     title: "Hostel Outpass Management System",

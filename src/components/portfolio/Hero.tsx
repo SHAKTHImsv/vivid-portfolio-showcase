@@ -77,8 +77,8 @@ export default function Hero() {
           className="flex items-center justify-center gap-4"
         >
           {[
-            { Icon: Github, href: "#" },
-            { Icon: Linkedin, href: "#" },
+            { Icon: Github, href: "https://github.com/SHAKTHImsv" },
+            { Icon: Linkedin, href: "https://www.linkedin.com/in/shakthivishwa-m-994225321?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
             { Icon: Mail, href: "mailto:shakthivishwa.07@gmail.com" },
           ].map(({ Icon, href }, i) => (
             <motion.a

@@ -6,13 +6,28 @@ import { Magnetic, Particles } from "./animations";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
-
+  
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSent(true);
     setTimeout(() => setSent(false), 3000);
     e.currentTarget.reset();
   };
+
+  const socialLinks = [
+  {
+    icon: Github,
+    url: "https://github.com/SHAKTHImsv",
+  },
+  {
+    icon: Linkedin,
+    url: "https://www.linkedin.com/in/shakthivishwa-m-994225321?utm_source=share_via&utm_content=profile&utm_medium=member_android",
+  },
+  {
+    icon: Mail,
+    url: "mailto:yourmail@gmail.com",
+  },
+];
 
   return (
     <section id="contact" className="relative py-28 px-6 overflow-hidden">
@@ -71,17 +86,22 @@ export default function Contact() {
             </div>
 
             <div className="pt-4 border-t border-white/10 flex gap-3">
-              {[Github, Linkedin, Mail].map((Ic, i) => (
-                <motion.a
-                  key={i}
-                  href="#"
-                  whileHover={{ scale: 1.15, rotate: 8 }}
-                  whileTap={{ scale: 0.9 }}
-                  className="w-11 h-11 rounded-full glass flex items-center justify-center hover:text-primary"
-                >
-                  <Ic className="w-5 h-5" />
-                </motion.a>
-              ))}
+              {socialLinks.map((item, i) => {
+  const Icon = item.icon;
+  return (
+    <motion.a
+      key={i}
+      href={item.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      whileHover={{ scale: 1.15, rotate: 8 }}
+      whileTap={{ scale: 0.9 }}
+      className="w-11 h-11 rounded-full glass flex items-center justify-center hover:text-primary"
+    >
+      <Icon className="w-5 h-5" />
+    </motion.a>
+  );
+})}
             </div>
           </motion.div>
 
@@ -136,7 +156,7 @@ export default function Contact() {
         </div>
 
         <div className="text-center mt-20 text-sm text-muted-foreground">
-          © {new Date().getFullYear()} Shakthivishwa M — Designed & built with 💜
+          © {new Date().getFullYear()} Shakthivishwa M 
         </div>
       </div>
     </section>
