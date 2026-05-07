@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
 import { SectionHeader } from "./Section";
 import { useState } from "react";
-import { Magnetic, Particles } from "./animations";
+import { Magnetic, Particles, GradientBlob } from "./animations";
 
 export default function Contact() {
   const [sent, setSent] = useState(false);
@@ -31,14 +31,10 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative py-28 px-6 overflow-hidden">
-      <div className="absolute inset-0 bg-cosmic opacity-60" />
-      <motion.div
-        animate={{ scale: [1, 1.2, 1], rotate: [0, 180, 360] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full opacity-20 blur-3xl"
-        style={{ background: "var(--gradient-primary)" }}
-      />
-      <Particles count={25} color="var(--neon-purple)" />
+      <div className="absolute inset-0 opacity-70" style={{ background: "var(--gradient-mesh)" }} />
+      <GradientBlob className="top-10 left-10" color="var(--neon-violet)" size={420} />
+      <GradientBlob className="bottom-10 right-10" color="var(--neon-coral)" size={420} delay={4} />
+      <Particles count={25} color="var(--neon-mint)" />
 
       <div className="container mx-auto max-w-5xl relative z-10">
         <SectionHeader

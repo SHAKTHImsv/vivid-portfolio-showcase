@@ -54,8 +54,8 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <TiltCard className="glass rounded-2xl p-6 text-center" max={12}>
-                <div className="font-display text-4xl font-bold text-rainbow">
+              <TiltCard className="border-aurora glass rounded-2xl p-6 text-center" max={12}>
+                <div className="font-display text-4xl font-bold text-aurora">
                   <Counter to={s.value} suffix={s.suffix} />
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">{s.label}</div>

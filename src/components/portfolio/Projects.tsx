@@ -9,21 +9,21 @@ const projects = [
   title: "AI-Powered Adaptive Learning Platform",
   desc: "An LLM-based learning platform that generates personalized learning paths, interactive modules, and AI-driven tutoring across trending domains.",
   tags: ["LLM", "React.js", "Python", "MongoDB"],
-  gradient: "linear-gradient(135deg, oklch(0.72 0.25 350), oklch(0.6 0.27 300))",
+  gradient: "linear-gradient(135deg, var(--neon-violet), var(--neon-coral))",
 },
   {
     Icon: FileText,
     title: "Hostel Outpass Management System",
     desc: "A secure role-based online outpass platform with real-time updates, built with a React.js frontend for a smooth student & warden experience.",
     tags: ["React.js", "Node.js", "Auth", "Realtime"],
-    gradient: "linear-gradient(135deg, oklch(0.65 0.22 260), oklch(0.78 0.18 200))",
+    gradient: "linear-gradient(135deg, var(--neon-sky), var(--neon-teal))",
   },
   {
     Icon: Database,
     title: "AI-Powered SQL Assistant",
     desc: "Converts natural-language prompts into SQL queries using Python and React.js, accelerating data exploration for non-technical users.",
     tags: ["Python", "React.js", "LLM", "SQL"],
-    gradient: "linear-gradient(135deg, oklch(0.78 0.22 150), oklch(0.85 0.2 95))",
+    gradient: "linear-gradient(135deg, var(--neon-mint), var(--neon-amber))",
   },
 ];
 
