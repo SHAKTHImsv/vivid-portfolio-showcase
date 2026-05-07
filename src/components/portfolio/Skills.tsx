@@ -3,36 +3,12 @@ import { SectionHeader } from "./Section";
 import { TiltCard, Spotlight } from "./animations";
 
 const groups = [
-  {
-    title: "Languages",
-    color: "var(--neon-pink)",
-    items: ["Python", "JavaScript", "Java", "C", "C++", "C#"],
-  },
-  {
-    title: "Web",
-    color: "var(--neon-cyan)",
-    items: ["React.js", "Node.js", "Express.js", "FastAPI", "HTML", "CSS"],
-  },
-  {
-    title: "Database",
-    color: "var(--neon-yellow)",
-    items: ["MongoDB", "MySQL"],
-  },
-  {
-    title: "Mobile & Cloud",
-    color: "var(--neon-green)",
-    items: ["React Native", "AWS (Basics)"],
-  },
-  {
-    title: "Tools",
-    color: "var(--neon-orange)",
-    items: ["Git", "GitHub", "Figma", "BrowserStack", "Power BI", "DAX"],
-  },
-  {
-    title: "Domains",
-    color: "var(--neon-purple)",
-    items: ["Generative AI", "ML / DL", "UI/UX", "Data Analytics"],
-  },
+  { title: "Languages",      color: "var(--neon-violet)", items: ["Python", "JavaScript", "Java", "C", "C++", "C#"] },
+  { title: "Web",            color: "var(--neon-teal)",   items: ["React.js", "Node.js", "Express.js", "FastAPI", "HTML", "CSS"] },
+  { title: "Database",       color: "var(--neon-amber)",  items: ["MongoDB", "MySQL"] },
+  { title: "Mobile & Cloud", color: "var(--neon-mint)",   items: ["React Native", "AWS (Basics)"] },
+  { title: "Tools",          color: "var(--neon-coral)",  items: ["Git", "GitHub", "Figma", "BrowserStack", "Power BI", "DAX"] },
+  { title: "Domains",        color: "var(--neon-sky)",    items: ["Generative AI", "ML / DL", "UI/UX", "Data Analytics"] },
 ];
 
 const marquee = [
@@ -59,7 +35,7 @@ export default function Skills() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: gi * 0.08 }}
             >
-              <TiltCard className="relative glass rounded-3xl p-6 overflow-hidden group h-full" max={8}>
+              <TiltCard className="border-aurora relative glass rounded-3xl p-6 overflow-hidden group h-full" max={8}>
                 <Spotlight />
                 <motion.div
                   className="absolute -top-16 -right-16 w-40 h-40 rounded-full blur-3xl opacity-40 group-hover:opacity-70 transition"
@@ -67,7 +43,7 @@ export default function Skills() {
                   animate={{ scale: [1, 1.2, 1], rotate: [0, 90, 0] }}
                   transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 />
-                <h3 className="font-display font-bold text-xl mb-4">{g.title}</h3>
+                <h3 className="font-display font-bold text-xl mb-4 group-hover:text-aurora transition">{g.title}</h3>
                 <div className="flex flex-wrap gap-2 relative z-10">
                   {g.items.map((it, idx) => (
                     <motion.span
