@@ -7,6 +7,7 @@ import Projects from "@/components/portfolio/Projects";
 import Achievements from "@/components/portfolio/Achievements";
 import Certifications from "@/components/portfolio/Certifications";
 import Contact from "@/components/portfolio/Contact";
+import { CursorGlow, ScrollProgress, Marquee } from "@/components/portfolio/animations";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,11 +30,22 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="bg-background text-foreground">
+    <main className="bg-background text-foreground relative">
+      <ScrollProgress />
+      <CursorGlow />
       <Navbar />
       <Hero />
       <About />
       <Skills />
+      <div className="relative py-6 border-y border-white/5 bg-card/30 backdrop-blur-sm">
+        <Marquee
+          items={[
+            "React", "TypeScript", "Python", "Generative AI",
+            "UI / UX", "Tailwind", "Framer Motion", "Node.js",
+            "Full-Stack", "Open to Work",
+          ]}
+        />
+      </div>
       <Projects />
       <Achievements />
       <Certifications />

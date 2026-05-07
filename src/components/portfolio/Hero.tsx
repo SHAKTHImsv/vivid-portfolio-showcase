@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from "lucide-react";
-import { SplitText, Magnetic, Particles } from "./animations";
+import { SplitText, Magnetic, Particles, GradientBlob, ScrambleText, ParallaxY } from "./animations";
 
 export default function Hero() {
   return (
@@ -8,14 +8,11 @@ export default function Hero() {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-cosmic grid-bg pt-24"
     >
-      {/* Animated blobs */}
-      <div className="absolute -top-32 -left-20 w-[500px] h-[500px] rounded-full opacity-40 blur-3xl animate-blob"
-           style={{ background: "var(--neon-pink)" }} />
-      <div className="absolute top-1/3 -right-32 w-[500px] h-[500px] rounded-full opacity-30 blur-3xl animate-blob"
-           style={{ background: "var(--neon-cyan)", animationDelay: "3s" }} />
-      <div className="absolute -bottom-32 left-1/3 w-[500px] h-[500px] rounded-full opacity-30 blur-3xl animate-blob"
-           style={{ background: "var(--neon-yellow)", animationDelay: "6s" }} />
-      <Particles count={40} color="var(--neon-pink)" />
+      {/* Aurora gradient blobs */}
+      <GradientBlob className="-top-32 -left-20" color="var(--neon-violet)" size={520} />
+      <GradientBlob className="top-1/3 -right-32" color="var(--neon-teal)" size={520} delay={3} />
+      <GradientBlob className="-bottom-32 left-1/3" color="var(--neon-coral)" size={520} delay={6} />
+      <Particles count={36} color="var(--neon-mint)" />
 
       <div className="relative z-10 container mx-auto px-6 text-center">
         <motion.div
@@ -28,12 +25,18 @@ export default function Hero() {
           <span className="text-sm text-muted-foreground">Available for opportunities</span>
         </motion.div>
 
-        <h1 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-6">
-          <SplitText delay={0.1}>Hi, I'm </SplitText>
-          <span className="text-rainbow"><SplitText delay={0.3}>Shakthivishwa</SplitText></span>
-          <br />
-          <span className="text-gradient"><SplitText delay={0.7}>Building the future</SplitText></span>
-        </h1>
+        <ParallaxY offset={30}>
+          <h1 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-6">
+            <SplitText delay={0.1}>Hi, I'm </SplitText>
+            <span className="text-aurora"><SplitText delay={0.3}>Shakthivishwa</SplitText></span>
+            <br />
+            <span className="text-gradient"><SplitText delay={0.7}>Building the future</SplitText></span>
+          </h1>
+        </ParallaxY>
+
+        <div className="font-mono-display text-sm md:text-base uppercase tracking-[0.3em] text-accent mb-6">
+          <ScrambleText text="Full-Stack · UI/UX · Generative AI" />
+        </div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -54,8 +57,7 @@ export default function Hero() {
           <Magnetic>
             <a
               href="#projects"
-              className="inline-block px-7 py-3 rounded-full font-semibold text-primary-foreground neon-shadow animate-pulse-glow"
-              style={{ background: "var(--gradient-primary)" }}
+              className="inline-block px-7 py-3 rounded-full font-semibold text-primary-foreground bg-aurora animate-pulse-glow"
             >
               View My Work
             </a>

@@ -1,4 +1,4 @@
-import { motion, useMotionValue, useSpring, useTransform, useInView, animate } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform, useInView, useScroll, animate } from "framer-motion";
 import { useEffect, useRef, useState, type ReactNode, type MouseEvent } from "react";
 
 /* Character-by-character reveal */
@@ -136,5 +136,115 @@ export function Magnetic({ children, strength = 0.3, className = "" }: { childre
     >
       {children}
     </motion.div>
+  );
+}
+
+/* Top-of-page scroll progress bar */
+export function ScrollProgress() {
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 22, mass: 0.2 });
+  return (
+    <motion.div
+      style={{ scaleX, transformOrigin: "0% 50%" }}
+      className="fixed top-0 left-0 right-0 h-[3px] z-[70] bg-aurora"
+    />
+  );
+}
+
+/* Soft aurora blob that follows the cursor */
+export function CursorGlow() {
+  const x = useSpring(0, { stiffness: 80, damping: 18, mass: 0.6 });
+  const y = useSpring(0, { stiffness: 80, damping: 18, mass: 0.6 });
+  useEffect(() => {
+    const move = (e: globalThis.MouseEvent) => { x.set(e.clientX); y.set(e.clientY); };
+    window.addEventListener("mousemove", move);
+    return () => window.removeEventListener("mousemove", move);
+  }, [x, y]);
+  return (
+    <motion.div
+      aria-hidden
+      style={{ x, y }}
+      className="fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full pointer-events-none z-[5] mix-blend-screen blur-3xl opacity-40 hidden md:block"
+    >
+      <div className="w-full h-full rounded-full bg-aurora" />
+    </motion.div>
+  );
+}
+
+/* Scramble-text reveal: scrambles random chars then resolves */
+const SCRAMBLE_CHARS = "!<>-_\\/[]{}—=+*^?#________";
+export function ScrambleText({ text, className = "", duration = 1.2 }: { text: string; className?: string; duration?: number }) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const inView = useInView(ref, { once: true, margin: "-50px" });
+  const [out, setOut] = useState(text);
+  useEffect(() => {
+    if (!inView) return;
+    let frame = 0;
+    const total = Math.round(duration * 60);
+    const id = setInterval(() => {
+      frame++;
+      const progress = frame / total;
+      let s = "";
+      for (let i = 0; i < text.length; i++) {
+        if (i / text.length < progress) s += text[i];
+        else if (text[i] === " ") s += " ";
+        else s += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+      }
+      setOut(s);
+      if (frame >= total) { setOut(text); clearInterval(id); }
+    }, 1000 / 60);
+    return () => clearInterval(id);
+  }, [inView, text, duration]);
+  return <span ref={ref} className={className}>{out}</span>;
+}
+
+/* Infinite horizontal marquee */
+export function Marquee({ items, speed = 30, className = "" }: { items: string[]; speed?: number; className?: string }) {
+  const doubled = [...items, ...items];
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      <div className="flex gap-10 whitespace-nowrap" style={{ animation: `marquee ${speed}s linear infinite` }}>
+        {doubled.map((it, i) => (
+          <span key={i} className="font-mono-display uppercase tracking-[0.25em] text-sm text-muted-foreground inline-flex items-center gap-10">
+            {it}
+            <span className="w-1.5 h-1.5 rounded-full bg-aurora" />
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* Scroll-linked vertical parallax */
+export function ParallaxY({ children, offset = 60, className = "" }: { children: ReactNode; offset?: number; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
+  const y = useTransform(scrollYProgress, [0, 1], [offset, -offset]);
+  return (
+    <motion.div ref={ref} style={{ y }} className={className}>
+      {children}
+    </motion.div>
+  );
+}
+
+/* Animated gradient blob — large, slow, organic */
+export function GradientBlob({
+  className = "",
+  color = "var(--neon-violet)",
+  size = 500,
+  delay = 0,
+}: { className?: string; color?: string; size?: number; delay?: number }) {
+  return (
+    <motion.div
+      aria-hidden
+      className={`absolute rounded-full blur-3xl pointer-events-none mix-blend-screen ${className}`}
+      style={{ width: size, height: size, background: color, opacity: 0.45 }}
+      animate={{
+        scale: [1, 1.15, 0.95, 1],
+        x: [0, 30, -20, 0],
+        y: [0, -25, 20, 0],
+      }}
+      transition={{ duration: 14, repeat: Infinity, ease: "easeInOut", delay }}
+    />
   );
 }
