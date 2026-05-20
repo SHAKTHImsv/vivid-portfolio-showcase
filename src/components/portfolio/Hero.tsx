@@ -11,7 +11,7 @@ export default function Hero() {
       {/* Aurora gradient blobs */}
       <GradientBlob className="-top-32 -left-20" color="var(--neon-violet)" size={520} />
       <GradientBlob className="top-1/3 -right-32" color="var(--neon-teal)" size={520} delay={3} />
-      <GradientBlob className="-bottom-32 left-1/3" color="var(--neon-coral)" size={520} delay={6} />
+      <GradientBlob className="-bottom-32 left-1/3 hidden md:block" color="var(--neon-coral)" size={520} delay={6} />
       <Particles count={36} color="var(--neon-mint)" />
 
       <div className="relative z-10 container mx-auto px-6 text-center">
@@ -25,8 +25,8 @@ export default function Hero() {
           <span className="text-sm text-muted-foreground">Available for opportunities</span>
         </motion.div>
 
-        <ParallaxY offset={30}>
-          <h1 className="font-display font-bold text-5xl md:text-7xl lg:text-8xl leading-[0.95] mb-6">
+        <ParallaxY offset={30} className="md:[transform:none]">
+          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] md:leading-[0.95] mb-6 break-words">
             <SplitText delay={0.1}>Hi, I'm </SplitText>
             <span className="text-aurora"><SplitText delay={0.3}>Shakthivishwa</SplitText></span>
             <br />
