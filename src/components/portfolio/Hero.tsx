@@ -26,7 +26,7 @@ export default function Hero() {
         </motion.div>
 
         <ParallaxY offset={30} className="md:[transform:none]">
-          <h1 className="font-display font-bold text-4xl sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] md:leading-[0.95] mb-6 break-words">
+          <h1 className="font-display font-bold text-[2rem] sm:text-5xl md:text-7xl lg:text-8xl leading-[1.05] md:leading-[0.95] mb-6">
             <SplitText delay={0.1}>Hi, I'm </SplitText>
             <span className="text-aurora"><SplitText delay={0.3}>Shakthivishwa</SplitText></span>
             <br />
