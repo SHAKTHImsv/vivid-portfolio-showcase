@@ -91,7 +91,7 @@ export function Spotlight({ className = "" }: { className?: string }) {
 export function Particles({ count = 30, color = "var(--neon-cyan)" }: { count?: number; color?: string }) {
   const particles = Array.from({ length: count });
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <div className="absolute inset-0 pointer-events-none overflow-hidden hidden md:block">
       {particles.map((_, i) => {
         const size = 2 + Math.random() * 4;
         const dur = 6 + Math.random() * 8;
@@ -237,8 +237,8 @@ export function GradientBlob({
   return (
     <motion.div
       aria-hidden
-      className={`absolute rounded-full blur-3xl pointer-events-none mix-blend-screen ${className}`}
-      style={{ width: size, height: size, background: color, opacity: 0.45 }}
+      className={`absolute rounded-full blur-3xl pointer-events-none mix-blend-screen opacity-20 md:opacity-45 ${className}`}
+      style={{ width: size, height: size, background: color }}
       animate={{
         scale: [1, 1.15, 0.95, 1],
         x: [0, 30, -20, 0],
